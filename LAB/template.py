@@ -3,8 +3,8 @@ RECORD CHECK  -  my version
 ===========================
 
 Name  :Theo
-Lane  :AI       
-Date  :29/09/2026
+Lane  :AI      (delete two)
+Date  :03-10-26
 
 Run it:   python template.py
 
@@ -13,59 +13,72 @@ Delete these instructions as you replace them with your code.
 """
 
 # ==================================================================== INPUT
-# 1. Ask the user for your three values.
+# 1. Ask for your three values.
 #
 #    - the first is TEXT      (a name, a hostname, an IP)  -> no conversion needed
 #    - the second is a NUMBER (use float(), not int())
-#    - the third  is a NUMBER (use float(), not int())
-#
-#    Remember: input() always gives back text.
+#    - the third  is a NUMBER (use float(), not int())While True:
 
-label =input("Enter host name: ")     # : replace with an input() call
-first =float(input("Enter first number: "))  # : replace with an input() call, converted
-second =float(input("Enter second number: "))  # : replace with an input() call, converted
+while True:
+
+    label =input("Enter a hostname or type 'quit' if you wish to leave: ")
+    if label == "quit":
+        break
+    else:
+
+
+     value =float(input("Enter value: "))     
+     limit = float(input("Enter limit: "))     
 
 
 # ================================================================== PROCESS
-# 2. Work out what you were NOT given.       [Typical and above]
-#
-#    - difference : how far the first is from the second
-#    - percent    : the first as a percentage of the second
-#
-#    Do not type the answers. Calculate them.
+# 2. Work out the difference and the percentage.       [Typical and above]
 
-difference =first-second   # 
-percent = (first/second) * 100    # 
+    difference =limit-value  # replace with your calculation
+    percent = (value/limit)*100 # replace with your calculation
+# 3. Decide a status and store it in a variable called status.
+#
+#    Threshold : if / else        -> "OVER LIMIT" or "OK"
+#    Typical   : if / elif / else -> "OVER LIMIT" (100% or more),
+    count=0                                  
+    if percent>=100:
+        status = "OVER LIMIT"
+        count+=1
+    elif percent>=90:
+        status="WARNING"
+    else:
+        status= "OK"
+         
 
 
 # =================================================================== OUTPUT
-# 3. Print the report.
+# 4. Print the report.
 #
-#    Threshold : print the three values you were given, inside a border
+#    Threshold : the three values you were given, plus status, inside a border
 #    Typical   : add difference and percent, 2 decimal places, right-aligned
-#    Excellent : difference always shows its sign, plus one line of your own
-#
-#    Useful:   f"{value:>10.2f}"    right-aligned, 2 decimal places
-#              f"{value:>+10.2f}"   the same, but always shows the sign
+#    Excellent : wrap sections 1-4 in a loop so you can check as many records
+#                as you like in one run - type "quit" as the label to stop.
+#                Keep count of how many came back OVER LIMIT and print that
+#                once, after the loop ends.
 
-print()
-print("=" * 34)
-print(f"  RECORD CHECK  -  {label}")
-print("=" * 34)
-print(f"hostname     : {label:>10}")
-print(f"first number : {first:>10.2f}")
-print(f"second number: {second:>10.2f}")
-print(f"Difference   : {difference:>+10.2f}")
-print(f"Percentage   : {percent:>10.2f}%")
-
-
-print("=" * 34)
+    print()
+    print("=" * 34)
+    print(f"  RECORD CHECK  -  {label}")
+    print("=" * 34)
+    print(f"  Value       : {value:>10.2f}")
+    print(f"  Limit       : {limit:>10.2f}")
+    print(f"  Difference  : {difference:>+10.2f}")
+    print(f"  Of limit    : {percent:>9.1f} %")
+    print(f"  Status      : {status:>10}")
 
 
+
+    print("=" * 34)
+
+print(f"{count} record(s) came back with a status of 'over limit'")
 # ==========================================================================
-# 4. Before you finish:
+# 5. Before you finish:
 #
 #    [ ] Run it three times with different numbers
-#    [ ] Run it with a total of 0 and write the error in your journal
+#    [ ] Run it with a total of 0 and note the error (do not fix it yet)
 #    [ ] Check every variable name says what it holds
-#    [ ] Show it to the person next to you
